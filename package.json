@@ -1,0 +1,22 @@
+{
+  "name": "hangman-node-app",
+  "version": "1.0.0",
+  "description": "A simple hangman game for command line",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sambiguous/hangman-node-app.git"
+  },
+  "author": "Sam DeFrank",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sambiguous/hangman-node-app/issues"
+  },
+  "homepage": "https://github.com/Sambiguous/hangman-node-app#readme",
+  "dependencies": {
+    "inquirer": "^4.0.0"
+  }
+}
