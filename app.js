@@ -1,8 +1,19 @@
 var Word = require("./objects.js");
 var art = require("./art.js");
 var inq = require("inquirer");
+var fs = require("fs");
 
-var test = "Harry Potter and the Prisoner of Azkaban"
+var words;
+
+fs.readFile("answers.JSON", "utf-8", function(err, data){
+    if(err){
+        console.log(err);
+    };
+
+    words = JSON.parse(data).songs;
+});
+
+
 art.title()
 
 inq.prompt([
@@ -13,7 +24,8 @@ inq.prompt([
     }
 ]).then(function(data){
     if(data.play){
-        var round = new Round(test);
+        var index = Math.floor(Math.random() * words.length);
+        var round = new Round(words[index]);
         round.letterPrompt(round);
     };
 });
@@ -37,10 +49,10 @@ function Round(answer){
             self.word.guessLetter(data.letter);
 
             if(self.word.guessesLeft === 0){
-                console.log("You Lose!");
+                endGame("loss");
             }
             else if(self.word.allGuessed()){
-                console.log("You Win!");
+                endGame("win");
             }
             else{
                 self.letterPrompt(self);
@@ -48,4 +60,25 @@ function Round(answer){
         });
     };
 };
+
+function endGame(winLoss){
+    var message;
+
+    if(winLoss === "win"){message = "Congratulations, you win!\nWould you like to play again?"}
+    else{message = "Sorry, you Lose!\nWould you like to play again?"}
+
+    inq.prompt([
+        {
+            type: "confirm",
+            message: message,
+            name: "again"
+        }
+    ]).then(function(data){
+        if(data.again){
+            var index = Math.floor(Math.random() * words.length);
+            var round = new Round(words[index]);
+            round.letterPrompt(round);
+        }
+    })
+}
 

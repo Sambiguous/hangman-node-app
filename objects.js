@@ -44,7 +44,7 @@ var Word = function(word){
         for(i in this.letters){
             output += this.letters[i].display;
         }
-        console.log(output);
+        console.log(output + "\n\n");
     };
 
     this.guessLetter = function(letter){
